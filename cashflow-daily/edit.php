@@ -1,8 +1,21 @@
 <?php
 require "../config/connection.php";
 
-// include "../helpers/path.php";
-// include "../middleware/isGuest.php";
+if (isset($_GET["id"])) {
+    $id = $_GET['id'];
+    $sql = "SELECT * from cashflow WHERE id = $id";
+    $query = mysqli_query($conn, $sql);
+    $data = mysqli_fetch_assoc($query);
+
+    $angkaBersih = str_replace(['Rp.', ','], ['', ''], $data["spend"]);
+
+    // Mengganti koma desimal dengan titik (jika ada koma)
+    $angkaBersih = str_replace('.', '', substr($angkaBersih, 0, -3)) . '.' . substr($angkaBersih, -2);
+
+    // Mengonversi menjadi float
+    $spend = (float) $angkaBersih;
+    $description = $data['description'];
+}
 
 $error = "";
 
@@ -20,11 +33,13 @@ if (isset($_POST["submit"])) {
 
     if (empty($error)) {
         $spend = "Rp." . number_format($spend, 2, '.', ',');
-        $sql = "INSERT INTO cashflow (description, spend) VALUES ('$description', '$spend')";
+        $sql = "UPDATE cashflow SET
+                    description = '$description',
+                    spend = '$spend' WHERE id = $id";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            header("Location: ../cashflow-daily.php?success=record has been successfully added!");
+            header("Location: ../cashflow-daily.php?success=record has been successfully edited!");
         } else {
             $error = "Error: " . mysqli_error($conn);
         }
@@ -102,11 +117,11 @@ if (isset($_POST["submit"])) {
                                 <form action="" method="post">
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Description</label>
-                                        <input type="text" class="form-control" id="description" name="description" required>
+                                        <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description); ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="spend" class="form-label">Spend</label>
-                                        <input type="number" class="form-control" id="spend" name="spend" required>
+                                        <input type="number" class="form-control" id="spend" name="spend" value="<?php echo htmlspecialchars($spend) ?>" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                                 </form>

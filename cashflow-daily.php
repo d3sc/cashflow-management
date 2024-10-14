@@ -2,6 +2,10 @@
 
 include "config/connection.php";
 
+if (isset($_GET['success'])) {
+    $success = htmlspecialchars($_GET['success'], ENT_QUOTES, 'UTF-8');
+}
+
 $tanggalSaatIni = date("d");
 $bulanSaatIni = date('m');
 $tahunSaatIni = date('Y');
@@ -155,6 +159,16 @@ if (isset($_POST['delete'])) {
                     </div>
                 </div>
 
+                <?php
+                if ($success) {
+                ?>
+                    <div class="alert alert-success" role="alert">
+                        <?php echo $success ?>
+                    </div>
+                <?php
+                }
+                ?>
+
                 <a href="cashflow-daily/create.php" class="btn btn-primary my-3">
                     Add Cashflow
                 </a>
@@ -186,7 +200,9 @@ if (isset($_POST['delete'])) {
                                 <td><?php echo $data['description'] ?></td>
                                 <td><?php echo $data['spend'] ?></td>
                                 <td class="d-flex justify-content-center align-item-center gap-3">
-                                    <button class="btn btn-warning">Edit</button>
+                                    <a href="cashflow-daily/edit.php?id=<?php echo $data['id'] ?>">
+                                        <button class="btn btn-warning">Edit</button>
+                                    </a>
                                     <form action="" method="POST">
                                         <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden>
                                         <button type="submit" name="delete" class="btn btn-danger">Delete</button>
