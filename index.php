@@ -2,6 +2,7 @@
 
 include "config/connection.php";
 
+
 ?>
 
 <!doctype html>
@@ -64,21 +65,21 @@ include "config/connection.php";
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">
+                            <a class="nav-link active" aria-current="page" href="index.php">
                                 <span data-feather="home"></span>
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="cashflow-daily.php">
-                                <span data-feather="file"></span>
-                                Orders
+                                <span data-feather="shopping-cart"></span>
+                                Daily Cashflow
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="shopping-cart"></span>
-                                Products
+                            <a class="nav-link" href="cashflow.php">
+                                <span data-feather="file-text"></span>
+                                Cashflow
                             </a>
                         </li>
                     </ul>
@@ -115,146 +116,83 @@ include "config/connection.php";
                     </div>
                 </div>
 
+                <h2>Weekly Report</h2>
                 <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-
-                <h2>Section title</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                                <th scope="col">Header</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>random</td>
-                                <td>data</td>
-                                <td>placeholder</td>
-                                <td>text</td>
-                            </tr>
-                            <tr>
-                                <td>1,002</td>
-                                <td>placeholder</td>
-                                <td>irrelevant</td>
-                                <td>visual</td>
-                                <td>layout</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>data</td>
-                                <td>rich</td>
-                                <td>dashboard</td>
-                                <td>tabular</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>information</td>
-                                <td>placeholder</td>
-                                <td>illustrative</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,004</td>
-                                <td>text</td>
-                                <td>random</td>
-                                <td>layout</td>
-                                <td>dashboard</td>
-                            </tr>
-                            <tr>
-                                <td>1,005</td>
-                                <td>dashboard</td>
-                                <td>irrelevant</td>
-                                <td>text</td>
-                                <td>placeholder</td>
-                            </tr>
-                            <tr>
-                                <td>1,006</td>
-                                <td>dashboard</td>
-                                <td>illustrative</td>
-                                <td>rich</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,007</td>
-                                <td>placeholder</td>
-                                <td>tabular</td>
-                                <td>information</td>
-                                <td>irrelevant</td>
-                            </tr>
-                            <tr>
-                                <td>1,008</td>
-                                <td>random</td>
-                                <td>data</td>
-                                <td>placeholder</td>
-                                <td>text</td>
-                            </tr>
-                            <tr>
-                                <td>1,009</td>
-                                <td>placeholder</td>
-                                <td>irrelevant</td>
-                                <td>visual</td>
-                                <td>layout</td>
-                            </tr>
-                            <tr>
-                                <td>1,010</td>
-                                <td>data</td>
-                                <td>rich</td>
-                                <td>dashboard</td>
-                                <td>tabular</td>
-                            </tr>
-                            <tr>
-                                <td>1,011</td>
-                                <td>information</td>
-                                <td>placeholder</td>
-                                <td>illustrative</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,012</td>
-                                <td>text</td>
-                                <td>placeholder</td>
-                                <td>layout</td>
-                                <td>dashboard</td>
-                            </tr>
-                            <tr>
-                                <td>1,013</td>
-                                <td>dashboard</td>
-                                <td>irrelevant</td>
-                                <td>text</td>
-                                <td>visual</td>
-                            </tr>
-                            <tr>
-                                <td>1,014</td>
-                                <td>dashboard</td>
-                                <td>illustrative</td>
-                                <td>rich</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,015</td>
-                                <td>random</td>
-                                <td>tabular</td>
-                                <td>information</td>
-                                <td>text</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </main>
         </div>
     </div>
 
 
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script src="js/dashboard.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            "use strict";
+
+            feather.replace({
+                "aria-hidden": "true"
+            });
+
+            // AJAX untuk mengambil data dari PHP
+            $.ajax({
+                url: 'data/weekly.php', // Ganti dengan path file PHP Anda
+                type: 'GET',
+                dataType: 'json', // Mengharapkan data JSON dari PHP
+                success: function(data) {
+                    // Menginisialisasi chart setelah data dari PHP diterima
+                    var ctx = $("#myChart");
+
+                    let dataPoints = [
+                        data.Monday,
+                        data.Tuesday,
+                        data.Wednesday,
+                        data.Thursday,
+                        data.Friday,
+                        data.Saturday,
+                        data.Sunday
+                    ];
+
+                    var myChart = new Chart(ctx, {
+                        type: "line",
+                        data: {
+                            labels: [
+                                "Monday", "Tuesday", "Wednesday",
+                                "Thursday", "Friday", "Saturday", "Sunday"
+                            ],
+                            datasets: [{
+                                data: dataPoints, // Data dari PHP dimasukkan ke sini
+                                lineTension: 0,
+                                backgroundColor: "transparent",
+                                borderColor: "#007bff",
+                                borderWidth: 4,
+                                pointBackgroundColor: "#007bff",
+                            }],
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: false,
+                                    },
+                                }],
+                            },
+                            legend: {
+                                display: false,
+                            },
+                        },
+                    });
+                },
+                error: function(jqxhr, textStatus, error) {
+                    console.error("Request failed: " + textStatus + ", " + error);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
