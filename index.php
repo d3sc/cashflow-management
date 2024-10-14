@@ -116,7 +116,10 @@ include "config/connection.php";
                     </div>
                 </div>
 
-                <h2>Weekly Report</h2>
+                <div class="d-flex justify-content-between align-item-center">
+                    <h2>Weekly Report</h2>
+                    <h2 id="weeklyTotalSpend">Weekly Total : </h2>
+                </div>
                 <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
             </main>
         </div>
@@ -146,6 +149,7 @@ include "config/connection.php";
                 success: function(data) {
                     // Menginisialisasi chart setelah data dari PHP diterima
                     var ctx = $("#myChart");
+                    let weeklyTotalSpend = $("#weeklyTotalSpend");
 
                     let dataPoints = [
                         data.Monday,
@@ -156,6 +160,13 @@ include "config/connection.php";
                         data.Saturday,
                         data.Sunday
                     ];
+
+                    let weeklySpend = dataPoints.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+                    weeklyTotalSpend.append("Rp. " + weeklySpend.toLocaleString('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR'
+                    }).replace('Rp', '').trim())
 
                     var myChart = new Chart(ctx, {
                         type: "line",
