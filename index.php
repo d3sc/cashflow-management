@@ -16,10 +16,6 @@ include "config/connection.php";
     <meta name="generator" content="Hugo 0.84.0">
     <title>Dashboard Template · Bootstrap v5.0</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
-
-
-
     <!-- Bootstrap core CSS -->
     <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
