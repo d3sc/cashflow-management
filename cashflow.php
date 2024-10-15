@@ -112,7 +112,7 @@ if (isset($_GET['success'])) {
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="file-text"></span>
-                                Current month
+                                Income
                             </a>
                         </li>
                     </ul>

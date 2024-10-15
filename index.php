@@ -94,7 +94,7 @@ if (!$_SESSION['is_login']) {
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="file-text"></span>
-                                Current month
+                                Income
                             </a>
                         </li>
                     </ul>
@@ -124,6 +124,8 @@ if (!$_SESSION['is_login']) {
                     <h2 id="weeklyTotalSpend">Weekly Total : </h2>
                 </div>
                 <canvas class="my-4 w-100" id="weeklyChart" width="900" height="380"></canvas>
+
+                <div class="mb-5"></div>
 
                 <div class="d-flex justify-content-between align-item-center">
                     <h2>Monthly Report</h2>

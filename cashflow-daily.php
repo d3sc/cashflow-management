@@ -137,7 +137,7 @@ if (isset($_POST['delete'])) {
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="file-text"></span>
-                                Current month
+                                Income
                             </a>
                         </li>
                     </ul>
