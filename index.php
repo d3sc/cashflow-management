@@ -1,7 +1,11 @@
 <?php
 
+session_start();
 include "config/connection.php";
 
+if (!$_SESSION['is_login']) {
+    header("location: auth/login.php");
+}
 
 ?>
 
@@ -50,7 +54,7 @@ include "config/connection.php";
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="#">Sign out</a>
+                <a class="nav-link px-3" href="auth/logout.php">Sign out</a>
             </div>
         </div>
     </header>
@@ -99,7 +103,10 @@ include "config/connection.php";
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
+                    <div class="">
+                        <h1 class="h2">Dashboard</h1>
+                        <h4>Welcome back, <?php echo $_SESSION['username'] ?> 👋</h4>
+                    </div>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>

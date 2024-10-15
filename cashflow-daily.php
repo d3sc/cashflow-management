@@ -1,6 +1,11 @@
 <?php
 
+session_start();
 include "config/connection.php";
+
+if (!$_SESSION['is_login']) {
+    header("location: auth/login.php");
+}
 
 if (isset($_GET['success'])) {
     $success = htmlspecialchars($_GET['success'], ENT_QUOTES, 'UTF-8');
@@ -92,7 +97,7 @@ if (isset($_POST['delete'])) {
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="#">Sign out</a>
+                <a class="nav-link px-3" href="auth/logout.php">Sign out</a>
             </div>
         </div>
     </header>

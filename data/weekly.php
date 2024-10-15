@@ -1,6 +1,10 @@
 <?php
 
 include "../config/connection.php";
+session_start();
+if (!$_SESSION['is_login']) {
+    header("location: ../auth/login.php");
+}
 
 $mysql = "SELECT * FROM cashflow WHERE WEEK(time) = WEEK(CURDATE()) AND YEAR(time) = YEAR(CURDATE());";
 $result = mysqli_query($conn, $mysql);

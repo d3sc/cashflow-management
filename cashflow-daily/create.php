@@ -1,6 +1,11 @@
 <?php
 require "../config/connection.php";
 
+session_start();
+if (!$_SESSION['is_login']) {
+    header("location: ../auth/login.php");
+}
+
 // include "../helpers/path.php";
 // include "../middleware/isGuest.php";
 

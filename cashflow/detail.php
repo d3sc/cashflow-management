@@ -1,5 +1,10 @@
 <?php
 
+session_start();
+if (!$_SESSION['is_login']) {
+    header("location: ../auth/login.php");
+}
+
 require "../config/connection.php";
 
 if (isset($_GET["date"])) {

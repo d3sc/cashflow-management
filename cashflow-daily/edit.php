@@ -1,6 +1,11 @@
 <?php
 require "../config/connection.php";
 
+session_start();
+if (!$_SESSION['is_login']) {
+    header("location: ../auth/login.php");
+}
+
 if (isset($_GET["id"])) {
     $id = $_GET['id'];
     $sql = "SELECT * from cashflow WHERE id = $id";
