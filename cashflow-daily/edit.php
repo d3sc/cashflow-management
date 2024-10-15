@@ -12,13 +12,7 @@ if (isset($_GET["id"])) {
     $query = mysqli_query($conn, $sql);
     $data = mysqli_fetch_assoc($query);
 
-    $angkaBersih = str_replace(['Rp.', ','], ['', ''], $data["spend"]);
-
-    // Mengganti koma desimal dengan titik (jika ada koma)
-    $angkaBersih = str_replace('.', '', substr($angkaBersih, 0, -3)) . '.' . substr($angkaBersih, -2);
-
-    // Mengonversi menjadi float
-    $spend = (float) $angkaBersih;
+    $spend = (float) $data['spend'];
     $description = $data['description'];
 }
 

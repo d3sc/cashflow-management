@@ -11,16 +11,6 @@ if (isset($_GET['success'])) {
     $success = htmlspecialchars($_GET['success'], ENT_QUOTES, 'UTF-8');
 }
 
-$tanggalSaatIni = date("d");
-$bulanSaatIni = date('m');
-$tahunSaatIni = date('Y');
-// $sql = "SELECT * FROM cashflow AS c WHERE c.time IN (SELECT MIN(time) FROM cashflow GROUP BY DATE(time)) ORDER BY c.time;";
-
-$sql = "SELECT *, SUM(spend) AS total_spend
-FROM cashflow
-GROUP BY DATE(time)
-ORDER BY time;"
-
 ?>
 
 <!doctype html>
@@ -154,49 +144,14 @@ ORDER BY time;"
                 }
                 ?>
 
-                <div class="d-flex justify-content-between align-item-center">
-                    <!-- <h2>History All Cashflow</h2> -->
-                </div>
-                <table id="example" class="table table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Date</th>
-                            <th style="text-align: center;">Total Spend</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $index = 1;
+                <div class="mb-3"></div>
 
-                        $result = mysqli_query($conn, $sql);
-                        while ($data = mysqli_fetch_array($result)):
-                        ?>
-                            <tr>
-                                <td><?php echo $index ?></td>
-                                <td><?php echo date("Y-m-d", strtotime($data['time'])) ?></td>
-                                <td style="text-align: center;"><?php echo "Rp." . number_format($data['total_spend'], 2, '.', ',') ?></td>
-                                <td class="d-flex justify-content-center align-item-center gap-3">
-                                    <a href="cashflow/detail.php?date=<?php echo date("Y-m-d", strtotime($data['time'])) ?>">
-                                        <button class="btn btn-primary">Details</button>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php
-                            $index++;
-                        endwhile;
-                        ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Time</th>
-                            <th>Spend</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                <?php include "cashflow/cashflow-monthly.php" ?>
+
+                <div class="mb-5"></div>
+
+                <?php include "cashflow/cashflow-daily.php" ?>
+
 
             </main>
         </div>
@@ -209,7 +164,8 @@ ORDER BY time;"
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
-            $("#example").DataTable()
+            $("#daily").DataTable()
+            $("#monthly").DataTable()
         })
     </script>
 </body>

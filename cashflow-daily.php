@@ -177,53 +177,56 @@ if (isset($_POST['delete'])) {
                     <h2>History Daily Cashflow</h2>
                     <h2>Total: <?php echo $totalSpend ?></h2>
                 </div>
-                <table id="example" class="table table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Time</th>
-                            <th>Description</th>
-                            <th>Spend</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $index = 1;
 
-                        $result = mysqli_query($conn, $sql);
-                        while ($data = mysqli_fetch_array($result)):
-                        ?>
+                <div class="table-responsive">
+                    <table id="example" class="table table-striped table-hover table-bordered" style="width:100%">
+                        <thead>
                             <tr>
-                                <td><?php echo $index ?></td>
-                                <td><?php echo $data['time'] ?></td>
-                                <td><?php echo $data['description'] ?></td>
-                                <td><?php echo "Rp." . number_format($data['spend'], 2, '.', ',') ?></td>
-                                <td class="d-flex justify-content-center align-item-center gap-3">
-                                    <a href="cashflow-daily/edit.php?id=<?php echo $data['id'] ?>">
-                                        <button class="btn btn-warning">Edit</button>
-                                    </a>
-                                    <form action="" method="POST">
-                                        <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden>
-                                        <button type="submit" name="delete" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </td>
+                                <th>No</th>
+                                <th>Time</th>
+                                <th>Description</th>
+                                <th>Spend</th>
+                                <th>Action</th>
                             </tr>
-                        <?php
-                            $index++;
-                        endwhile;
-                        ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>No</th>
-                            <th>Time</th>
-                            <th>Description</th>
-                            <th>Spend</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $index = 1;
+
+                            $result = mysqli_query($conn, $sql);
+                            while ($data = mysqli_fetch_array($result)):
+                            ?>
+                                <tr>
+                                    <td><?php echo $index ?></td>
+                                    <td><?php echo $data['time'] ?></td>
+                                    <td><?php echo $data['description'] ?></td>
+                                    <td><?php echo "Rp." . number_format($data['spend'], 2, '.', ',') ?></td>
+                                    <td class="d-flex justify-content-center gap-3">
+                                        <a href="cashflow-daily/edit.php?id=<?php echo $data['id'] ?>">
+                                            <button class="btn btn-warning">Edit</button>
+                                        </a>
+                                        <form action="" method="POST">
+                                            <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden>
+                                            <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php
+                                $index++;
+                            endwhile;
+                            ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>No</th>
+                                <th>Time</th>
+                                <th>Description</th>
+                                <th>Spend</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
 
             </main>
         </div>
