@@ -123,7 +123,13 @@ if (!$_SESSION['is_login']) {
                     <h2>Weekly Report</h2>
                     <h2 id="weeklyTotalSpend">Weekly Total : </h2>
                 </div>
-                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+                <canvas class="my-4 w-100" id="weeklyChart" width="900" height="380"></canvas>
+
+                <div class="d-flex justify-content-between align-item-center">
+                    <h2>Monthly Report</h2>
+                    <h2 id="monthlyTotalSpend">Monthly Total : </h2>
+                </div>
+                <canvas class="my-4 w-100" id="monthlyChart" width="900" height="380"></canvas>
             </main>
         </div>
     </div>
@@ -151,8 +157,8 @@ if (!$_SESSION['is_login']) {
                 dataType: 'json', // Mengharapkan data JSON dari PHP
                 success: function(data) {
                     // Menginisialisasi chart setelah data dari PHP diterima
-                    var ctx = $("#myChart");
-                    let weeklyTotalSpend = $("#weeklyTotalSpend");
+                    var ctx = $("#weeklyChart");
+                    let monthlyTotalSpend = $("#monthlyTotalSpend");
 
                     let dataPoints = [
                         data.Monday,
@@ -163,6 +169,74 @@ if (!$_SESSION['is_login']) {
                         data.Saturday,
                         data.Sunday
                     ];
+
+                    let monthlySpend = dataPoints.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+                    monthlyTotalSpend.append("Rp. " + monthlySpend.toLocaleString('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR'
+                    }).replace('Rp', '').trim())
+
+                    var myChart = new Chart(ctx, {
+                        type: "line",
+                        data: {
+                            labels: [
+                                "Monday", "Tuesday", "Wednesday",
+                                "Thursday", "Friday", "Saturday", "Sunday"
+                            ],
+                            datasets: [{
+                                data: dataPoints, // Data dari PHP dimasukkan ke sini
+                                lineTension: 0,
+                                backgroundColor: "transparent",
+                                borderColor: "#007bff",
+                                borderWidth: 4,
+                                pointBackgroundColor: "#007bff",
+                            }],
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: false,
+                                    },
+                                }],
+                            },
+                            legend: {
+                                display: false,
+                            },
+                        },
+                    });
+                },
+                error: function(jqxhr, textStatus, error) {
+                    console.error("Request failed: " + textStatus + ", " + error);
+                }
+            });
+
+            // AJAX untuk mengambil data dari PHP
+            $.ajax({
+                url: 'data/monthly.php', // Ganti dengan path file PHP Anda
+                type: 'GET',
+                dataType: 'json', // Mengharapkan data JSON dari PHP
+                success: function(data) {
+                    // Menginisialisasi chart setelah data dari PHP diterima
+                    var ctx = $("#monthlyChart");
+                    let weeklyTotalSpend = $("#weeklyTotalSpend");
+
+                    let dataPoints = [
+                        data.January,
+                        data.February,
+                        data.March,
+                        data.April,
+                        data.May,
+                        data.June,
+                        data.July,
+                        data.August,
+                        data.September,
+                        data.October,
+                        data.November,
+                        data.December
+                    ];
+
 
                     let weeklySpend = dataPoints.reduce((accumulator, currentValue) => accumulator + currentValue);
 
@@ -175,8 +249,10 @@ if (!$_SESSION['is_login']) {
                         type: "line",
                         data: {
                             labels: [
-                                "Monday", "Tuesday", "Wednesday",
-                                "Thursday", "Friday", "Saturday", "Sunday"
+                                "January", "February", "March",
+                                "April", "May", "June",
+                                "July", "August", "September",
+                                "October", "November", "December"
                             ],
                             datasets: [{
                                 data: dataPoints, // Data dari PHP dimasukkan ke sini
