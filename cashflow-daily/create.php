@@ -19,7 +19,7 @@ if (isset($_POST["submit"])) {
     }
 
     if (empty($error)) {
-        $spend = "Rp." . number_format($spend, 2, '.', ',');
+        // $spend = "Rp." . number_format($spend, 2, '.', ',');
         $sql = "INSERT INTO cashflow (description, spend) VALUES ('$description', '$spend')";
         $result = mysqli_query($conn, $sql);
 

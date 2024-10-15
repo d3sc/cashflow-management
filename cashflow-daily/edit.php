@@ -32,7 +32,6 @@ if (isset($_POST["submit"])) {
     }
 
     if (empty($error)) {
-        $spend = "Rp." . number_format($spend, 2, '.', ',');
         $sql = "UPDATE cashflow SET
                     description = '$description',
                     spend = '$spend' WHERE id = $id";

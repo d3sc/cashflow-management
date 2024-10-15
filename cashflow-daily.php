@@ -14,13 +14,8 @@ $result = mysqli_query($conn, $sql);
 
 $totalSpend = 0;
 while ($data = mysqli_fetch_array($result)) {
-    $angkaBersih = str_replace(['Rp.', ','], ['', ''], $data["spend"]);
-
-    // Mengganti koma desimal dengan titik (jika ada koma)
-    $angkaBersih = str_replace('.', '', substr($angkaBersih, 0, -3)) . '.' . substr($angkaBersih, -2);
-
     // Mengonversi menjadi float
-    $angka = (float) $angkaBersih;
+    $angka = (float) $data['spend'];
 
     $totalSpend += $angka;
 }
@@ -198,7 +193,7 @@ if (isset($_POST['delete'])) {
                                 <td><?php echo $index ?></td>
                                 <td><?php echo $data['time'] ?></td>
                                 <td><?php echo $data['description'] ?></td>
-                                <td><?php echo $data['spend'] ?></td>
+                                <td><?php echo "Rp." . number_format($data['spend'], 2, '.', ',') ?></td>
                                 <td class="d-flex justify-content-center align-item-center gap-3">
                                     <a href="cashflow-daily/edit.php?id=<?php echo $data['id'] ?>">
                                         <button class="btn btn-warning">Edit</button>
